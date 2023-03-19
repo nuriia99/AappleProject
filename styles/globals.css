@@ -25,4 +25,7 @@
   .header_img{
     @apply h-[20px] cursor-pointer opacity-75 transition hover:opacity-100
   }
+  .link{
+    @apply font-medium cursor-pointer relative w-fit after:absolute after:h-[3px] after:w-[0] after:bg-black after:bottom-0 after:left-0 after:hover:w-[100%] after:transition-all after:duration-300
+  }
 }

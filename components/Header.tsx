@@ -25,7 +25,7 @@ function Header() {
       <div className='flex items-center justify-end gap-4 w-1/5'>
         <MagnifyingGlassIcon className='header_img'/>
         <Link href='checkout' className='relative'>
-          <span className='absolute z-10 top-[-5px] right-[-5px] rounded-full bg-violet-500 h-4 w-4 flex items-center justify-center text-xs'>5</span>
+          <span className='absolute z-10 top-[-5px] right-[-5px] rounded-full text-white bg-gradient-to-r from-pink-500 to-violet-500 h-4 w-4 flex items-center justify-center text-xs'>5</span>
           <ShoppingBagIcon className='header_img'/>
         </Link>
         {
