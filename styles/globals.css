@@ -16,6 +16,17 @@
     color: inherit;
     text-decoration: none;
   }
+  ::-webkit-scrollbar{
+    width: 8px;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb{
+    background: #727678;
+    border-radius: 10px;
+  }
+
+
 }
 
 @layer component{

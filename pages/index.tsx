@@ -10,7 +10,16 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header/>
-      <Landing/>
+       <main className="relative h-[200vh] bg-[#E7ECEE]">
+        <Landing />
+      </main>
+        <section className='relative z-40 -mt-[100vh] min-h-screen bg-[#1B1B1B]'>
+          <div className='pt-14'>
+            <h1 className='text-center text-white font-medium text-4xl lg:text-5xl'>
+              New promos
+            </h1>
+          </div>
+        </section>
     </div>
   )
 }
