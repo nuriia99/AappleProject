@@ -1,4 +1,4 @@
-interface Page {
+interface Category {
   _id: string,
   _createdAt: string,
   _updatedAt: string,
