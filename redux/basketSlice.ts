@@ -18,8 +18,9 @@ export const basketSlice = createSlice({
       state.items.push(action.payload)
       console.log('a')
     },
-    removeBasket: (state, action: PayloadAction<Product>) => {
-      const index = state.items.findIndex((item) => item === action.payload)
+    removeBasket: (state, action: PayloadAction<{ id: string }>) => {
+      const index = state.items.findIndex((item) => item._id === action.payload.id)
+      console.log(index)
       if (index >= 0) state.items.splice(index, 1)
     }
   },
