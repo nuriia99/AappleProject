@@ -23,6 +23,7 @@ interface Product {
   },
   title: string,
   price: number,
+  timesSelected: number,
   image: [{
     _key: string,
     _type: 'image',

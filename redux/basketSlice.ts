@@ -15,26 +15,38 @@ export const basketSlice = createSlice({
   initialState,
   reducers: {
     addBasket: (state, action: PayloadAction<Product>) => {
-      state.items.push(action.payload)
-      console.log('a')
+      const index = state.items.findIndex((product) => action.payload._id === product._id)
+      if(index === -1) state.items.push( {...action.payload, timesSelected: 1 } )
+      else state.items[index].timesSelected++
     },
     removeBasket: (state, action: PayloadAction<{ id: string }>) => {
       const index = state.items.findIndex((item) => item._id === action.payload.id)
-      console.log(index)
-      if (index >= 0) state.items.splice(index, 1)
-    }
+      if (index >= 0) {
+        if(state.items[index].timesSelected === 1) state.items.splice(index, 1)
+        else state.items[index].timesSelected--
+      }
+    },
+    increaseTimesSelected: (state, action: PayloadAction<{ id: string }>) => {
+      const index = state.items.findIndex((item) => item._id === action.payload.id)
+      if (index >= 0) {
+        state.items[index].timesSelected++
+      }
+    },
+    decreaseTimesSelected: (state, action: PayloadAction<{ id: string }>) => {
+      const index = state.items.findIndex((item) => item._id === action.payload.id)
+      if (index >= 0) {
+        state.items[index].timesSelected--
+      }
+    },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { addBasket, removeBasket } = basketSlice.actions
+export const { addBasket, removeBasket, increaseTimesSelected, decreaseTimesSelected } = basketSlice.actions
 
 export const selectBasketItems = (state: RootState) => state.basket.items
-export const selectBasketItemsWithId = (state: RootState, id: string) => {
-  state.basket.items.filter((item: Product) => item._id === id)
-}
 export const selectBasketTotal = (state: RootState) =>  {
-  state.basket.items.reduce((total: number, item: Product) => (total += item.price), 0)
+  return state.basket.items.reduce((total: number, item: Product) => (total += item.price * item.timesSelected), 0)
 }
   
 

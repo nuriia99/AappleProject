@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import BasketItem from "../components/BasketItem";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import { useRouter } from "next/router"
-import { selectBasketItems } from "../redux/basketSlice";
+import { selectBasketItems, selectBasketTotal } from "../redux/basketSlice";
 
 
 const Basket = () => {
 
   const items = useSelector(selectBasketItems)
+  const total = useSelector(selectBasketTotal)
+
 
   const router = useRouter()
 
@@ -33,6 +35,11 @@ const Basket = () => {
                   return <BasketItem product={p}/>
                 })
               }
+            </div>
+            <div className="h-[2px] bg-gray-300 my-5"></div>
+            <div>
+              <p className="pb-14">Free delivery and free returns.</p>
+              <p className="pb-14">{total}</p>
             </div>
           </>
         }
