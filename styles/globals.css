@@ -29,6 +29,7 @@
 
 }
 
+
 @layer component{
   .headerLink{
     @apply cursor-pointer opacity-75 transition hover:opacity-100
@@ -39,4 +40,25 @@
   .link{
     @apply font-medium cursor-pointer relative w-fit after:absolute after:h-[3px] after:w-[0] after:bg-black after:bottom-0 after:left-0 after:hover:w-[100%] after:transition-all after:duration-300
   }
+
+  .tabPanel{
+    @apply grid grid-cols-1 gap-8 sm:grid-cols-2
+  }
+  
+}
+
+.borderGradient {
+  text-align: center;
+  padding-bottom: 5px;
+  background: linear-gradient(to right, #ec4899, #8b5cf6) left bottom
+    no-repeat;
+  background-size: 100% 2px;
+}
+
+.shoppingIcon{
+  transition: 0.5s;
+}
+
+.shoppingIcon:hover{
+  transform: scale(1.1);
 }
