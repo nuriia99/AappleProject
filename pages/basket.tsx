@@ -92,7 +92,7 @@ const Basket = () => {
                 <h4 className="text-lg font-semibold pb-2 text-center">Pay Mothly with Apple Card</h4>
                 <h4 className="text-lg font-semibold pb-2 text-center">$283.16/mo. at 0% APR<sup className="-top-1">◊</sup></h4>
                 <h4 className="pb-7 text-lg font-semibold">$ {Intl.NumberFormat('en-US').format(total)}</h4>
-                <Button title="Check Out with Apple Card Monthly Installments"/>
+                <Button title="Check Out with Apple Card Monthly Installments" onClick={createCheckOutSession} loading={loading}/>
               </div>
             </div>
           </>

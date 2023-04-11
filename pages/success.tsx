@@ -4,10 +4,12 @@ import Link from 'next/link'
 import { CheckCircleIcon } from '@heroicons/react/24/outline'
 import { useRouter } from "next/router"
 import Button from "../components/Button";
+import { useSession } from 'next-auth/react'
 
 const success = () => {
   const router = useRouter()
   const { session_id } = router.query
+  const { data: session } = useSession()
 
 
   return (
