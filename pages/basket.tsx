@@ -18,10 +18,11 @@ const Basket = () => {
 
   const router = useRouter()
 
-  const [loading, setLoading] = useState(false)
+  const [loadingBtn1, setLoadingBtn1] = useState(false)
+  const [loadingBtn2, setLoadingBtn2] = useState(false)
 
-  const createCheckOutSession = async () => {
-    setLoading(true)
+  const createCheckOutSessionBtn1 = async () => {
+    setLoadingBtn1(true)
 
     const checkoutSession: Stripe.Checkout.Session = await fetchPostJSON("/api/checkout_sessions", {
       items: items
@@ -29,7 +30,7 @@ const Basket = () => {
 
     if((checkoutSession as any).statusCode === 500) {
       console.error('session failed')
-      setLoading(false)
+      setLoadingBtn1(false)
       return
     }
 
@@ -39,7 +40,29 @@ const Basket = () => {
     })
 
     console.warn(error.message)
-    setLoading(false)
+    setLoadingBtn1(false)
+  }
+
+  const createCheckOutSessionBtn2 = async () => {
+    setLoadingBtn2(true)
+
+    const checkoutSession: Stripe.Checkout.Session = await fetchPostJSON("/api/checkout_sessions", {
+      items: items
+    })
+
+    if((checkoutSession as any).statusCode === 500) {
+      console.error('session failed')
+      setLoadingBtn2(false)
+      return
+    }
+
+    const stripe = await getStripe()
+    const {error} = await stripe!.redirectToCheckout({
+      sessionId: checkoutSession.id
+    })
+
+    console.warn(error.message)
+    setLoadingBtn2(false)
   }
 
   return (
@@ -86,13 +109,13 @@ const Basket = () => {
               <div className="h-full flex flex-col items-center justify-center bg-gray-300 rounded-md p-10">
                 <h4 className="text-lg font-semibold pb-2">Pay in full</h4>
                 <h4 className="pb-7 text-lg font-semibold">$ {Intl.NumberFormat('en-US').format(total)}</h4>
-                <Button title="Check out" onClick={createCheckOutSession} loading={loading}/>
+                <Button title="Check out" onClick={createCheckOutSessionBtn1} loading={loadingBtn1}/>
               </div>
               <div className="flex flex-col items-center bg-gray-300 rounded-md  p-10">
                 <h4 className="text-lg font-semibold pb-2 text-center">Pay Mothly with Apple Card</h4>
                 <h4 className="text-lg font-semibold pb-2 text-center">$283.16/mo. at 0% APR<sup className="-top-1">◊</sup></h4>
                 <h4 className="pb-7 text-lg font-semibold">$ {Intl.NumberFormat('en-US').format(total)}</h4>
-                <Button title="Check Out with Apple Card Monthly Installments" onClick={createCheckOutSession} loading={loading}/>
+                <Button title="Check Out with Apple Card Monthly Installments" onClick={createCheckOutSessionBtn2} loading={loadingBtn2}/>
               </div>
             </div>
           </>
