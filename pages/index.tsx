@@ -11,6 +11,7 @@ import { getSession } from 'next-auth/react';
 import type { Session } from 'next-auth';
 
 
+
 interface Props {
   categories: Category[],
   products: Product[],

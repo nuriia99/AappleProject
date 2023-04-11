@@ -88,17 +88,17 @@ const Basket = () => {
             </div>
             <div className="h-[2px] bg-gray-300 my-5"></div>
             <div className="flex justify-between">
-              <p>Subtotal</p>
-              <p>{Intl.NumberFormat('en-US').format(total)}</p>
-            </div>
-            <div className="flex justify-between">
-              <p>Shipping</p>
-              <p>FREE</p>
-            </div>
-            <div className="flex justify-between">
-              <p>Estimated tax for:</p>
-              <p>$ -</p>
-            </div>
+                <p>Subtotal</p>
+                <p>$ {Intl.NumberFormat('en-US').format(total)}</p>
+              </div>
+              <div className="flex justify-between">
+                <p>Shipping</p>
+                <p>FREE</p>
+              </div>
+              <div className="flex justify-between">
+                <p>Estimated tax for:</p>
+                <p>$ -</p>
+              </div>
             <div className="h-[2px] bg-gray-300 my-5"></div>
             <div className="flex justify-between">
               <h4 className="text-xl font-semibold pb-2">Total</h4>

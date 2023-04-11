@@ -37,7 +37,7 @@ function Header() {
       </div>
       <div className='flex items-center justify-end gap-4 w-1/5'>
         <MagnifyingGlassIcon className='header_img'/>
-        <Link href='basket' className='relative'>
+        <Link href='checkout' className='relative'>
           <span className='absolute z-10 top-[-5px] right-[-5px] rounded-full text-white bg-gradient-to-r from-pink-500 to-violet-500 h-4 w-4 flex items-center justify-center text-xs'>{items.length}</span>
           <ShoppingBagIcon className='header_img'/>
         </Link>
