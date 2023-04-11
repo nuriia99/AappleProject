@@ -23,7 +23,7 @@ const Product = ({ product, id}: Props) => {
   }
 
   return (
-    <div className="bg-[#2e3135] p-8 rounded-lg h-[350px] w-[350px]">
+    <div className="bg-[#2e3135] p-8 rounded-lg h-[400px] w-[300px]">
     <div className="flex justify-center p-5">
       <div className="h-[200px] w-[200px] relative">
           <Image src={urlFor(product.image[0]).url()} alt='iphoneLandingImage' fill style={{objectFit:'cover'}}/>

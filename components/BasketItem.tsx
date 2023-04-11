@@ -30,7 +30,7 @@ const BasketItem = ({ product }: Props) => {
   }
 
   return (
-    <div className="grid py-7  sm:grid-cols-[minmax(150px,200px)_minmax(150px,300px)_300px]  sm:gap-10">
+    <div className="grid py-7 sm:grid-cols-[150px_180px_220px]  sm:gap-5">
       <div>
         <div className="h-[150px] w-[150px] relative">
           <Image src={urlFor(product.image[0]).url()} alt='iphoneLandingImage' fill style={{objectFit:'cover'}}/>
@@ -39,8 +39,8 @@ const BasketItem = ({ product }: Props) => {
       <div className="pt-4 flex flex-col sm:flex-row justify-between gap-10">
         <h4 className="text-xl font-semibold pb-4">{product.title}</h4>    
       </div>
-      <div className="flex justify-between">
-        <div className="flex items-center gap-5  h-fit">
+      <div className="flex justify-between gap-6">
+        <div className="flex items-center gap-4  h-fit">
           <div onClick={decreaseTimes} className="text-gray-700 cursor-pointer opacity-75 transition hover:opacity-100 duration-200">-</div>
           <h4 className="pt-4 text-xl font-semibold pb-4">{product.timesSelected}</h4>
           <div onClick={increaseTimes} className="text-gray-700 cursor-pointer opacity-75 transition hover:opacity-100 duration-500">+</div>

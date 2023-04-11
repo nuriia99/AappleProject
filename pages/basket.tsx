@@ -1,10 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import BasketItem from "../components/BasketItem";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import { useRouter } from "next/router"
 import { selectBasketItems, selectBasketTotal } from "../redux/basketSlice";
+import Stripe from "stripe";
+import { fetchPostJSON } from "../utils/api-helpers";
+import getStripe from "../utils/get-stripejs";
+
 
 
 const Basket = () => {
@@ -12,8 +16,31 @@ const Basket = () => {
   const items = useSelector(selectBasketItems)
   const total = useSelector(selectBasketTotal)
 
-
   const router = useRouter()
+
+  const [loading, setLoading] = useState(false)
+
+  const createCheckOutSession = async () => {
+    setLoading(true)
+
+    const checkoutSession: Stripe.Checkout.Session = await fetchPostJSON("/api/checkout_sessions", {
+      items: items
+    })
+
+    if((checkoutSession as any).statusCode === 500) {
+      console.error('session failed')
+      setLoading(false)
+      return
+    }
+
+    const stripe = await getStripe()
+    const {error} = await stripe!.redirectToCheckout({
+      sessionId: checkoutSession.id
+    })
+
+    console.warn(error.message)
+    setLoading(false)
+  }
 
   return (
     <>
@@ -37,9 +64,36 @@ const Basket = () => {
               }
             </div>
             <div className="h-[2px] bg-gray-300 my-5"></div>
-            <div>
-              <p className="pb-14">Free delivery and free returns.</p>
-              <p className="pb-14">{total}</p>
+            <div className="flex justify-between">
+              <p>Subtotal</p>
+              <p>{Intl.NumberFormat('en-US').format(total)}</p>
+            </div>
+            <div className="flex justify-between">
+              <p>Shipping</p>
+              <p>FREE</p>
+            </div>
+            <div className="flex justify-between">
+              <p>Estimated tax for:</p>
+              <p>$ -</p>
+            </div>
+            <div className="h-[2px] bg-gray-300 my-5"></div>
+            <div className="flex justify-between">
+              <h4 className="text-xl font-semibold pb-2">Total</h4>
+              <h4 className="text-xl font-semibold pb-2">$ {Intl.NumberFormat('en-US').format(total)}</h4>
+            </div>
+            <h4 className="text-xl font-semibold py-8">How would you like to check out?</h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 items-center sm:flex-row gap-5">
+              <div className="h-full flex flex-col items-center justify-center bg-gray-300 rounded-md p-10">
+                <h4 className="text-lg font-semibold pb-2">Pay in full</h4>
+                <h4 className="pb-7 text-lg font-semibold">$ {Intl.NumberFormat('en-US').format(total)}</h4>
+                <Button title="Check out" onClick={createCheckOutSession} loading={loading}/>
+              </div>
+              <div className="flex flex-col items-center bg-gray-300 rounded-md  p-10">
+                <h4 className="text-lg font-semibold pb-2 text-center">Pay Mothly with Apple Card</h4>
+                <h4 className="text-lg font-semibold pb-2 text-center">$283.16/mo. at 0% APR<sup className="-top-1">◊</sup></h4>
+                <h4 className="pb-7 text-lg font-semibold">$ {Intl.NumberFormat('en-US').format(total)}</h4>
+                <Button title="Check Out with Apple Card Monthly Installments"/>
+              </div>
             </div>
           </>
         }
