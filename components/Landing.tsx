@@ -4,7 +4,7 @@ import Button from './Button'
 
 function Landing() {
   return (
-    <section className='sticky top-0 h-screen max-w-[1350px] flex flex-row lg:justify-center items-center px-7 bg-[#E7ECEE]'>
+    <section className='sticky top-0 h-screen flex flex-row lg:justify-center items-center px-7 bg-[#E7ECEE]'>
       <div className='flex flex-col gap-2 py-64'>
         <span className='text-4xl lg:text-6xl tracking-wide font-semibold text-transparent bg-gradient-to-r bg-clip-text from-pink-500 to-violet-500'>Powered</span>
         <span className='text-4xl lg:text-6xl tracking-wide font-semibold'>By Intellect</span>

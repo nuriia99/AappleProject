@@ -2,7 +2,7 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ["rb.gy", "upload.wikimedia.org", "www.gravatar.com","cdn.sanity.io"]
+    domains: ["rb.gy", "upload.wikimedia.org", "www.gravatar.com","cdn.sanity.io", "lh3.googleusercontent.com"]
   },
   transpilePackages: ['react-redux']
   

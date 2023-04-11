@@ -3,12 +3,15 @@ import { store } from '../redux/store'
 import { Provider } from 'react-redux'
 import { AppProps } from 'next/app'
 import { Toaster } from 'react-hot-toast'
+import { SessionProvider } from "next-auth/react"
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+export default function MyApp({ Component, pageProps: {session, ...pageProps} }: AppProps) {
   return (
-    <Provider store={store}>
-      <Toaster/>
-      <Component {...pageProps} />
-    </Provider>
+    <SessionProvider session={session}>
+      <Provider store={store}>
+        <Toaster/>
+        <Component {...pageProps} />
+      </Provider>
+    </SessionProvider>
   )
 }

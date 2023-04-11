@@ -1,16 +1,24 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { ShoppingBagIcon, UserIcon } from '@heroicons/react/24/outline'
 import { useSelector } from 'react-redux'
 import { selectBasketItems } from '../redux/basketSlice'
+import { signIn, signOut, useSession } from 'next-auth/react'
 
 
 
 function Header() {
-  const [logIn, setLogIn] = useState(true)
+  const [logIn, setLogIn] = useState(false)
   const items = useSelector(selectBasketItems)
+  const {data: session} = useSession()
+
+  useEffect(() => {
+    if(session !== null) setLogIn(true)
+    else setLogIn(false)
+  }, [session])
+
   return (
   <>
   <nav className='sticky top-0 z-50 flex w-full items-center justify-between bg-[#E7ECEE] p-4'>
@@ -35,11 +43,11 @@ function Header() {
         </Link>
         {
           logIn ? <>
-            <div className=' relative h-[25px] w-[25px] rounded-full overflow-hidden'>
-              <Image src='https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y' fill  style={{objectFit:'contain'}} alt='userImage'/>
+            <div className=' relative h-[25px] w-[25px] rounded-full overflow-hidden cursor-pointer' onClick={() => signOut()}>
+              <Image src={session?.user?.image || 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y'} fill  style={{objectFit:'contain'}} alt='userImage'/>
             </div>
           </> :
-          <UserIcon className='header_img'/>
+          <UserIcon className='header_img' onClick={() => signIn()}/>
         }
       </div>
     </nav>
