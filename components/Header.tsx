@@ -17,7 +17,7 @@ function Header() {
       <div className='flex items-center justify-center md:w-1/5'>
         <Link href='/' className='relative'>
           <div className='relative h-10 w-5 cursor-pointer opacity-75 tranistion hover:opacity-100'>
-            <Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1667px-Apple_logo_black.svg.png" alt='iPhone14ProPhoto' fill style={{objectFit:'contain'}} />
+            <Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1667px-Apple_logo_black.svg.png" alt='appleIcon' fill style={{objectFit:'contain'}} />
           </div>
         </Link>
       </div>
